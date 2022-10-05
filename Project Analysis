@@ -1,0 +1,9 @@
+Objective: Discovering the relation between members and casulas usage of bikes. While the company is seeing that members are more profitable and they want to study the
+           performance in order to have more memberships from casuals.
+
+Analysis: 1- Calculating the duration of each trip by subtracting the end time from the start time
+          2- Extracting the weekday and the month that the biker rented the bike in.
+          3- Droping the start station and its id with the end station and its id after discovering that they have more than 15% of null values which make around
+             more than 1 million missing values. Also not knowing much about these stations and how they are located and what strategic importance they have made me taking
+             this decision to delete them. I think the ride duration will be good for my analysis.
+             
