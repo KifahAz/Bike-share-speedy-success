@@ -1,0 +1,63 @@
+import glob
+import pandas as pd
+import seaborn as  sns
+import matplotlib.pyplot as plt
+
+# specifying the path to csv or xlsx files
+path = r"C:add the files' path"
+
+# csv or xlsx files in the path
+file_list = glob.glob(path + "/*.xlsx") # you can replace xlsx by csv
+
+# list of excel files we want to merge.
+# pd.read_excel(file_path) reads the
+# excel data into pandas dataframe.
+excl_list = []
+
+for info in file_list:
+    excl_list.append(pd.read_excel(info))
+
+# concatenate all DataFrames in the list
+# into a single DataFrame, returns new
+# DataFrame.
+excl_merged = pd.concat(excl_list, ignore_index=True)
+""""
+This part of code is commented because after doing this calculation I saw that there is more than a million rows are missing in each column so I decided
+to drop these columns directly from excel because after merging this huge dataset, pandas was taking a lot of run time!!
+
+print("The ratio of blanks in start station names to the ride ids is: ",int((excl_merged['start_station_name'].isna().sum())/(excl_merged['ride_id'].count())*100),"%")
+print("The ratio of blanks in start station id to the ride ids is: ",int((excl_merged['start_station_id'].isna().sum())/(excl_merged['ride_id'].count())*100),"%\n")
+print("The ratio of blanks in end station name to the ride ids is: ",int((excl_merged['end_station_name'].isna().sum())/(excl_merged['ride_id'].count())*100),"%")
+print("The ratio of blanks in end station id to the ride ids is: ",int((excl_merged['end_station_id'].isna().sum())/(excl_merged['ride_id'].count())*100),"%\n")
+"""
+print(excl_merged)
+
+print("The average value of the ride length in hours is: ",'{:.3f}'.format(excl_merged['ride_length'].mean() / 60))
+print("The maximum ride length in hours is: ",'{:.3f}'.format(excl_merged['ride_length'].max() / 60))
+print("The most bike rental day is: ",excl_merged['weekday'].mode().values[0])
+print("\n")
+
+print("This is how many times bikes were rented per day: \n",excl_merged.groupby('weekday', as_index=True).size())
+print("This is how many times casuals and members rented bikes: \n",excl_merged.groupby('member_casual', as_index=True).size())
+print("\n")
+print("This is the average value which members and casuals rent bikes per day: \n",excl_merged.groupby(['member_casual', 'weekday'], as_index=True)['ride_length'].mean())
+
+print("This is the average value of ride length taken by members and casuals: \n",excl_merged.groupby('member_casual', as_index=True)['ride_length'].mean())
+print("This is the average value which members and casuals rent bikes per month: \n",excl_merged.groupby(['member_casual', 'Month'], as_index=True)['ride_length'].mean())
+
+weekday_sort = ['Mon','Tue', 'Wed','Thu','Fri','Sat','Sun']  #to order the plots of countplot
+month_sort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']  # same here 
+
+sns.barplot(x='Month', y='ride_length', data=excl_merged, hue='member_casual').set(title='Barplot showing members vs casual ride duration per month')
+plt.show()
+sns.countplot(x='weekday', data=excl_merged, order=weekday_sort).set(title='Countplot of rides taken per weekdays')
+plt.show()
+sns.countplot(x='Month', data=excl_merged, order=month_sort).set(title='Countplot of rides taken per month')
+plt.show()
+plt.figure(figsize=(12,6))
+sns.barplot(x='weekday', y='ride_length', data=excl_merged, hue='member_casual').set(title='Barplot showing members vs casual ride duration per weekdays')
+plt.legend(loc='upper center')
+plt.show()
+sns.histplot(x='Month', data=excl_merged, hue='rideable_type', bins=50).set(title='Histogram showing differnce of bike types used per month')
+plt.show()
+
