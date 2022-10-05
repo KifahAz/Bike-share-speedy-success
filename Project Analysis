@@ -7,3 +7,38 @@ Analysis: 1- Calculating the duration of each trip by subtracting the end time f
              more than 1 million missing values. Also not knowing much about these stations and how they are located and what strategic importance they have made me taking
              this decision to delete them. I think the ride duration will be good for my analysis.
              
+Some fast calculations:
+The average value of the ride length in hours is: 0.329 
+The maximum ride length in hours is: 678.417 (interesting)
+The most day bikes are rented is: Saturday (which is understanble- weekdend)
+
+This is how many times casuals and members rented bikes: 2.46 M for casuals and 3.41 M for members
+
+There are much more calculations per month and per weekday am not able to upload pics in here. I don't know why but you'll find all these once you run the code!!
+
+Data source: through this link --> https://divvy-tripdata.s3.amazonaws.com/index.html 
+Disclaimer: I downloaded from Sept of 2019 till the latest month given which is Aug 2020 (making it a full year)
+
+
+Click on this link to find the visualization report on Power BI
+
+Analysis and Visualizations:
+1- All over this analyzed year the ride counts are pretty similar b/w casual and members. However, all over the year every month members are using bikes mor than casuals
+  with a range between 70 to 120 k per month.
+2- Interesting fact shows that the high usage of these bikes are in the summer from June till September and probably this is because of weather conditions and summer time
+  is the most enjoyable time
+  
+3- As discussed before both casual and members rent bikes mostly in weekends with higher count for Saturday.
+4- The most siginificant fact is the ride duration difference between casuals and members as casuals have a significant ride duration which is always the double than that
+  of the members and reaching a maximum of 199,000 hours in July only while for members the max reached also in July is almost half reaching 88,000 hours.
+  
+5- Both members and casuals use electrical and classic bikes in the same proportion... It is half half but some of casulas rent docked bikes around 0.03% of the sum
+   of members and casulas, and 8.3% of casuals
+
+
+Conclusion:
+My suggestions are: a) Do more commercials showing that casuals are renting bikes almost the same as members while riding for much longer durations.
+                    b) Execute membership plans that is available from May till October which is half year subscription (maube casuals are not subscribing because
+                       they are renting bikes only in these months and they think that members use bikes all over the year)
+                    c) Advertise discounts for loyal members and ways to reduce bikes' rental when you are a member!
+
